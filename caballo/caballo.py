@@ -1,40 +1,40 @@
-import random
-import math
+def contar_movimientos_validos(n):
+    moves = {
+        0: [4, 6],
+        1: [6, 8],
+        2: [7, 9],
+        3: [4, 8],
+        4: [0, 3, 9],
+        5: [],
+        6: [0, 1, 7],
+        7: [2, 6],
+        8: [1, 3],
+        9: [2, 4]
+    }
 
-class ProblemaCaballo:
-    def __init__(self, N=8):
-        self.N = N 
-        self.movimientos_caballo = [
-            (2, 1), (1, 2), (-1, 2), (-2, 1),
-            (-2, -1), (-1, -2), (1, -2), (2, -1)
-        ]
-        self.tablero = [[-1 for _ in range(N)] for _ in range(N)]
-        self.recorrido = [] 
+    dp = [1] * 10
+    for _ in range(n):
+        new_dp = [0] * 10
+        for i in range(10):
+            for j in moves[i]:
+                new_dp[i] += dp[j]
+        dp = new_dp
 
-    def es_valido(self, x, y):
-        return 0 <= x < self.N and 0 <= y < self.N and self.tablero[x][y] == -1
+    return sum(dp)
 
-    def resolver_caballo(self, x, y, paso):
 
-        self.tablero[x][y] = paso  
-        self.recorrido.append((x, y)) 
+def generar_tabla_movimientos(nombre_archivo="movimientos.txt"):
+    movimientos = [1, 2, 3, 5, 8, 10, 15, 18, 21, 23, 32]
 
-        if paso == self.N * self.N - 1:
-            return True  
+    with open(nombre_archivo, "w") as archivo:
+        archivo.write("Cantidad de movimientos | Posibilidades válidas\n")
+        archivo.write("-----------------------------------------------\n")
+        for m in movimientos:
+            total = contar_movimientos_validos(m)
+            archivo.write(f"{m:<23} | {total}\n")
 
-        for dx, dy in self.movimientos_caballo:
-            nx, ny = x + dx, y + dy
-            if self.es_valido(nx, ny):
-                if self.resolver_caballo(nx, ny, paso + 1):
-                    return True
+    print(f"Archivo '{nombre_archivo}' guardado correctamente.")
 
-        self.tablero[x][y] = -1
-        self.recorrido.pop()
-        return False
 
-    def resolver(self, inicio_x=0, inicio_y=0):
-        if self.resolver_caballo(inicio_x, inicio_y, 0):
-            return self.tablero
-        else:
-            print("No se encontró solución.")
-            return None
+if __name__ == "__main__":
+    generar_tabla_movimientos()

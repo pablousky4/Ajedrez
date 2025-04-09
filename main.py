@@ -1,16 +1,14 @@
-from caballo.tablero import TableroVisual
+from caballo.caballo import generar_tabla_movimientos
 from reina.reina import resolver_reina
-#from hanoi.hanoi import TorreDeHanoi
+from hanoi.hanoi import TorreDeHanoi
 import random
+import os
 
 def juego_de_caballo():
     print("Ejecutando Caballo")
-    inicio_x = random.randint(0, 7)
-    inicio_y = random.randint(0, 7)
-    print(f"Posición inicial del caballo: ({inicio_x}, {inicio_y})")
+    generar_tabla_movimientos()
+    print("Archivo 'movimientos.txt' generado correctamente.")
 
-    tablero_visual = TableroVisual()
-    tablero_visual.ejecutar(inicio_x, inicio_y)
 
 def juego_de_reinas():
     print("Ejecutando Reina")
@@ -21,6 +19,14 @@ def juego_de_reinas():
             archivo.write(f"{solucion}\n")
     print("Soluciones guardadas en 'reina.txt'.")
 
+def problema_de_hanoi():
+    print("¡Bienvenido al problema de la Torre de Hanoi!")
+    num_discos = int(input("Ingrese el número de discos: "))
+    hanoi = TorreDeHanoi(num_discos)
+    print("\nEstado inicial de los palos:")
+    hanoi.mostrar_palos()
+    hanoi.resolver()
+    hanoi.imprimir_movimientos()
 
 if __name__ == "__main__":
     while True:
@@ -37,8 +43,7 @@ if __name__ == "__main__":
             elif opcion == "2":
                 juego_de_reinas()
             elif opcion == "3":
-                pass
-                #problema_de_hanoi()
+                problema_de_hanoi()
             elif opcion == "4":
                 print("¡Gracias por jugar!")
                 break

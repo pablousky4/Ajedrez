@@ -1,7 +1,4 @@
-import os
-
 def resolver_reina(N):
-
     soluciones = []
     tablero = [-1] * N  
 
@@ -11,15 +8,14 @@ def resolver_reina(N):
                 return False
         return True
 
-    def backtrack(fila):
+    def volver(fila):
         if fila == N:
             soluciones.append(tablero[:])
             return
         for columna in range(N):
             if es_valido(fila, columna):
                 tablero[fila] = columna
-                backtrack(fila + 1)
+                volver(fila + 1)
                 tablero[fila] = -1  
-
-    backtrack(0)
+    volver(0)
     return soluciones
