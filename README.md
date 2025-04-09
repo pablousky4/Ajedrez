@@ -31,3 +31,6 @@ Instala las dependencias ejecutando:
 
 ```bash
 pip install -r 
+
+
+![Image](https://github.com/user-attachments/assets/f4b5ec6a-199e-4b6d-87c4-459d64bf8dd3)
