@@ -1,8 +1,6 @@
 from caballo.caballo import generar_tabla_movimientos
 from reina.reina import resolver_reina
 from hanoi.hanoi import TorreDeHanoi
-import random
-import os
 
 def juego_de_caballo():
     print("Ejecutando Caballo")
