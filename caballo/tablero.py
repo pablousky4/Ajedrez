@@ -11,10 +11,10 @@ class TableroVisual:
 
     def mostrar_tablero(self, tablero):
         print("Recorrido del caballo en el tablero:")
-        print("   " + " ".join("abcdefgh"))  
+        print("   " + " ".join("abcdefgh"))  # Encabezado de columnas
         for i, fila in enumerate(tablero):
             print(f"{self.N - i} | " + " ".join(f"{celda:2}" if celda != -1 else " ." for celda in fila))
-        print("   " + " ".join("abcdefgh")) 
+        print("   " + " ".join("abcdefgh"))  # Pie de columnas
 
     def guardar_recorrido(self, recorrido):
         movimientos_ajedrez = []
@@ -31,8 +31,8 @@ class TableroVisual:
             f.write(str(vector_recorrido))
 
         print("\nGuardado en:")
-        print("- movimientos.txt ")
-        print("- vector.txt ")
+        print("- movimientos.txt")
+        print("- vector.txt")
 
     def ejecutar(self, inicio_x=0, inicio_y=0):
         solucion = self.problema_caballo.resolver(inicio_x, inicio_y)
@@ -40,4 +40,4 @@ class TableroVisual:
             self.mostrar_tablero(self.problema_caballo.tablero)
             self.guardar_recorrido(self.problema_caballo.recorrido)
         else:
-            print("No se encontró una solución.")
+            print("No se encontró una solución para el recorrido del caballo.")

@@ -8,23 +8,24 @@ class CaballoConRecorrido(ProblemaCaballo):
 
     def resolver_caballo(self, x, y, paso):
         if paso == self.N * self.N:
-            self.recorrido.append((x, y)) 
+            self.recorrido.append((x, y))  
             return True  
 
         for dx, dy in self.movimientos_caballo:
             nx, ny = x + dx, y + dy
             if self.es_valido(nx, ny):
                 self.tablero[nx][ny] = paso  
-                self.recorrido.append((x, y))  
+                self.recorrido.append((x, y)) 
                 if self.resolver_caballo(nx, ny, paso + 1):
                     return True
-                self.tablero[nx][ny] = -1 
+                self.tablero[nx][ny] = -1  
                 self.recorrido.pop()  
 
         return False
 
     def obtener_recorrido(self):
         return self.recorrido
+
 
 if __name__ == "__main__":
     inicio_x = random.randint(0, 7)
