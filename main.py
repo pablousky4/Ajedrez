@@ -49,3 +49,6 @@ if __name__ == "__main__":
                 print("Opción no válida. Por favor, intente de nuevo.")
         else:
             print("Por favor, ingrese un número válido.")
+
+if __name__ == "__main__":
+    main()
