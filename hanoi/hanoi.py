@@ -1,36 +1,56 @@
-class TorreDeHanoi:
-    def __init__(self, num_discos):
-        self.num_discos = num_discos
-        self.palos = {
-            "A": list(range(num_discos, 0, -1)),  
-            "B": [], 
-            "C": []  
-        }
-        self.movimientos = []
+import tkinter as tk
+from tkinter import ttk
 
-    def mover_disco(self, origen, destino):
-        disco = self.palos[origen].pop()
-        self.palos[destino].append(disco)
-        self.movimientos.append(f"Se mueve {disco} de {origen} a {destino}")
-        self.mostrar_palos()
+def hanoi(n, origen, destino, auxiliar):
+    if n == 1:
+        return [(origen, destino)]
+    movimientos = hanoi(n - 1, origen, auxiliar, destino)
+    movimientos.append((origen, destino))
+    movimientos.extend(hanoi(n - 1, auxiliar, destino, origen))
+    return movimientos
 
-    def resolver(self, num_discos=None, origen="A", auxiliar="B", destino="C"):
-        if num_discos is None:
-            num_discos = self.num_discos
+def mostrar_resultado_hanoi():
+    n = int(entrada_discos.get())
+    origen = entrada_origen.get()
+    destino = entrada_destino.get()
+    auxiliar = entrada_auxiliar.get()
+    resultado = hanoi(n, origen, destino, auxiliar)
+    texto_resultado.delete(1.0, tk.END)
+    texto_resultado.insert(tk.END, "\n".join([f"{movimiento[0]} -> {movimiento[1]}" for movimiento in resultado]))
 
-        if num_discos == 1:
-            self.mover_disco(origen, destino)
-        else:
-            self.resolver(num_discos - 1, origen, destino, auxiliar)
-            self.mover_disco(origen, destino)
-            self.resolver(num_discos - 1, auxiliar, origen, destino)
+# Crear la ventana principal
+raiz = tk.Tk()
+raiz.title("Resolver Hanoi")
 
-    def mostrar_palos(self):
-        print("\nEstado de los palos:")
-        for palo, discos in self.palos.items():
-            print(f"{palo}: {discos}")
+# Entradas
+ttk.Label(raiz, text="Número de discos:").grid(row=0, column=0, padx=5, pady=5)
+entrada_discos = ttk.Entry(raiz)
+entrada_discos.grid(row=0, column=1, padx=5, pady=5)
+entrada_discos.insert(0, "3")
 
-    def imprimir_movimientos(self):
-        print("\nMovimientos necesarios para resolver la Torre de Hanoi:")
-        for paso, movimiento in enumerate(self.movimientos, start=1):
-            print(f"Paso {paso}: {movimiento}")
+ttk.Label(raiz, text="Torre de origen:").grid(row=1, column=0, padx=5, pady=5)
+entrada_origen = ttk.Entry(raiz)
+entrada_origen.grid(row=1, column=1, padx=5, pady=5)
+entrada_origen.insert(0, "A")
+
+ttk.Label(raiz, text="Torre de destino:").grid(row=2, column=0, padx=5, pady=5)
+entrada_destino = ttk.Entry(raiz)
+entrada_destino.grid(row=2, column=1, padx=5, pady=5)
+entrada_destino.insert(0, "C")
+
+ttk.Label(raiz, text="Torre auxiliar:").grid(row=3, column=0, padx=5, pady=5)
+entrada_auxiliar = ttk.Entry(raiz)
+entrada_auxiliar.grid(row=3, column=1, padx=5, pady=5)
+entrada_auxiliar.insert(0, "B")
+
+# Botón para calcular
+boton_calcular = ttk.Button(raiz, text="Resolver", command=mostrar_resultado_hanoi)
+boton_calcular.grid(row=4, column=0, columnspan=2, pady=10)
+
+# Área de texto para mostrar el resultado
+texto_resultado = tk.Text(raiz, height=15, width=40)
+texto_resultado.grid(row=5, column=0, columnspan=2, padx=5, pady=5)
+
+# Ejecutar la aplicación
+raiz.mainloop()
+
