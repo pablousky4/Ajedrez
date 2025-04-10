@@ -35,26 +35,21 @@ def mostrar_resultado_reinas():
         etiqueta_imagen.config(image=img_tk)
         etiqueta_imagen.image = img_tk
     except FileNotFoundError:
-        etiqueta_imagen.config(text=f"No se encontró la imagen para {n} reinas en '{ruta_imagen}'.")
+        etiqueta_imagen.config(text=f"No se encontró la imagen en '{ruta_imagen}'.")
 
-# Crear la ventana principal
 raiz = tk.Tk()
 raiz.title("Resolver N-Reinas")
 
-# Entradas
 ttk.Label(raiz, text="Número de reinas:").grid(row=0, column=0, padx=5, pady=5)
 entrada_reinas = ttk.Entry(raiz)
 entrada_reinas.grid(row=0, column=1, padx=5, pady=5)
 entrada_reinas.insert(0, "4")
 
-# Botón para calcular
 boton_calcular = ttk.Button(raiz, text="Mostrar solución", command=mostrar_resultado_reinas)
 boton_calcular.grid(row=1, column=0, columnspan=2, pady=10)
 
-# Etiqueta para mostrar la imagen
 etiqueta_imagen = ttk.Label(raiz)
 etiqueta_imagen.grid(row=2, column=0, columnspan=2, padx=5, pady=5)
 
-# Ejecutar la aplicación
 raiz.mainloop()
 

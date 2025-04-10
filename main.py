@@ -2,9 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 import random
 import time
-
 root = tk.Tk()
-root.after(2000, root.destroy)  # Cierra la ventana tras 2 segundos
+root.after(2000, root.destroy)  
 root.mainloop()
 
 class RecorridoCaballoApp:
@@ -238,17 +237,14 @@ class AplicacionPrincipal:
         self.notebook = ttk.Notebook(raiz)
         self.notebook.pack(fill=tk.BOTH, expand=True)
 
-        # Pestaña Recorrido del Caballo
         marco_caballo = tk.Frame(self.notebook)
         self.notebook.add(marco_caballo, text="Recorrido del Caballo")
         RecorridoCaballoApp(marco_caballo)
 
-        # Pestaña Torre de Hanoi
         marco_hanoi = tk.Frame(self.notebook)
         self.notebook.add(marco_hanoi, text="Torre de Hanoi")
         HanoiApp(marco_hanoi)
 
-        # Pestaña N-Reinas
         marco_reinas = tk.Frame(self.notebook)
         self.notebook.add(marco_reinas, text="N-Reinas")
         NReinasApp(marco_reinas)
