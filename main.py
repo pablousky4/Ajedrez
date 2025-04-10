@@ -40,7 +40,7 @@ class RecorridoCaballoApp:
         x, y = self.posicion_caballo
         x1, y1 = y * 50 + 10, x * 50 + 10
         x2, y2 = x1 + 30, y1 + 30
-        self.canvas.create_oval(x1, y1, x2, y2, fill="blue", tags="caballo")
+        self.canvas.create_oval(x1, y1, x2, y2, fill="blue", tags="red")
 
     def es_movimiento_valido(self, x, y):
         return 0 <= x < self.tamaño_tablero and 0 <= y < self.tamaño_tablero and not self.visitado[x][y]
@@ -117,7 +117,7 @@ class HanoiApp:
                 x2 = x_centro + ancho // 2
                 y1 = 300 - (nivel + 1) * 20
                 y2 = y1 + 20
-                self.canvas.create_rectangle(x1, y1, x2, y2, fill="blue", tags="disco")
+                self.canvas.create_rectangle(x1, y1, x2, y2, fill="orange", tags="disco")
 
     def mover_disco(self, desde_varilla, hacia_varilla):
         disco = self.varillas[desde_varilla].pop()
@@ -189,7 +189,7 @@ class NReinasApp:
                     y1 = fila * tamaño_celda + tamaño_celda // 4
                     x2 = x1 + tamaño_celda // 2
                     y2 = y1 + tamaño_celda // 2
-                    self.canvas.create_oval(x1, y1, x2, y2, fill="red", tags="reina")
+                    self.canvas.create_oval(x1, y1, x2, y2, fill="green", tags="reina")
 
     def es_seguro(self, fila, columna):
         for i in range(fila):
