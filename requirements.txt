@@ -5,3 +5,4 @@ flask-sqlalchemy
 wtforms
 flask-migrate
 PyQt6
+xvfb
